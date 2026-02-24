@@ -1,0 +1,30 @@
+```mermaid
+flowchart TB
+    subgraph User["Usuario (sin XLM)"]
+        UA[Usuario dApp]
+        K[Par de claves]
+    end
+
+    subgraph Client["Client SDK"]
+        SI[Sign Intent]
+    end
+
+    subgraph Relayer["Relayer Backend"]
+        VF[Verificar Firma]
+        BT[Build Fee-Bump]
+        ST[Send Transaction]
+    end
+
+    subgraph Stellar["Red Stellar/Soroban"]
+        SN[Stellar Network]
+        SC[Smart Contract]
+    end
+
+    UA --> K
+    K -->|1. Firma intención| SI
+    SI -->|2. Envía intención firmada| VF
+    VF -->|3. Verifica| BT
+    BT -->|4. Fee-bump con sponsor| ST
+    ST -->|5. Submit txn| SN
+    SN -->|6. Ejecuta| SC
+```
